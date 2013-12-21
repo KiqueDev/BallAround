@@ -40,7 +40,7 @@ header h1{
 }
 
 .moveBall{
-  -webkit-animation: moveX 10s linear 0s infinite alternate, moveY 10s linear 0s infinite alternate;
+  -webkit-animation: moveX 20s linear 0s infinite alternate, moveY 20s linear 0s infinite alternate;
   -moz-animation: moveX 10s linear 0s infinite alternate, moveY 10s linear 0s infinite alternate;
   -o-animation: moveX 10s linear 0s infinite alternate, moveY 10s linear 0s infinite alternate;
   animation: moveX 10s linear 0s infinite alternate, moveY 10s linear 0s infinite alternate;
