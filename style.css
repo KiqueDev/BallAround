@@ -48,7 +48,7 @@ header h1{
 
 /* Random Keyframes */
 @-webkit-keyframes moveX {
-  0% { left: 0; } 20% { left: 20%; } 40% { left: 18%; } 60% { left: 80%; } 80% { left: 55%; } 100% { left: 100%; }
+  0% { left: 0; } 20% { left: 40%; } 40% { left: 18%; } 60% { left: 80%; } 80% { left: 0%; } 100% { left: 100%; }
 }
 @-moz-keyframes moveX {
   0% { left: 0; } 20% { left: 20%; } 40% { left: 18%; } 60% { left: 80%; } 80% { left: 55%; } 100% { left: 100%; }
@@ -61,7 +61,7 @@ header h1{
 }
 
 @-webkit-keyframes moveY {
-  0% { top: 0; } 20% { top: 100%; } 40% { top: 30%; } 60% { top: 60%; } 80% { top: 55%; } 100% { top: 100%; }
+  0% { top: 0; } 20% { top: 100%; } 40% { top: 0%; } 60% { top: 60%; } 80% { top: 55%; } 100% { top: 100%; }
 }
 @-moz-keyframes moveY {
  0% { top: 0; } 20% { top: 100%; } 40% { top: 30%; } 60% { top: 60%; } 80% { top: 55%; } 100% { top: 100%; }
