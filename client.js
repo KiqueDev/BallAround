@@ -34,20 +34,6 @@
       return pos;   
     }
 
-    // Function that Calculates the speed of the ball
-    // self.CalculateSpeed = function(oldPos, newPos){
-    //   var x = Math.abs(oldPos.x - newPos.x);
-    //   var y = Math.abs(newPos.y - newPos.y);
-      
-    //   var greatest = x > y ? x : y;
-      
-    //   var speedModifier = 100;
-
-    //   var speed = Math.ceil(greatest/speedModifier);
-
-    //   return speed;   
-    // }
-
     self.MoveRandom = function (ballDiv, ballSize){
       var transition = function(e) {
         // Stop other listener such as parent
@@ -57,10 +43,6 @@
 
           // Create random position for the ball
           var randomPos = self.RandomPosition(ballSize);
-          
-          // Get ball div element offset
-          var offset = ballDiv.getBoundingClientRect();
-          var currentPos = { x: offset.left, y: offset.top }
 
           // Set speed transition 4 second for now (Might change it so user can set it)
           ballDiv.style.transitionDuration = "4s";
@@ -71,7 +53,7 @@
 
         }
       }
-      
+
       // Event Listener for across browser when transition end callback function "transition"
       ballDiv.addEventListener("webkitTransitionEnd", transition, false);
       ballDiv.addEventListener("transitionend", transition, false);
