@@ -19,7 +19,7 @@
       // Set with and height of the ball
       ballDiv.style.width = ballSize.toString()+"px";
       ballDiv.style.height = ballSize.toString()+"px";
-    }
+    };
 
     // Function that Creates Random Position of the ball
     self.RandomPosition = function(ballSize){
@@ -32,7 +32,21 @@
       var pos = { x: newWidth , y: newHeight }
 
       return pos;   
-    }
+    };
+
+    // Function that Calculates the speed of the ball
+    self.CalculateSpeed = function(oldPos, newPos){
+      var x = Math.abs(oldPos.x - newPos.x);
+      var y = Math.abs(newPos.y - newPos.y);
+      
+      var greatest = x > y ? x : y;
+      
+      var speedModifier = 100;
+ 
+      var speed = Math.ceil(greatest/speedModifier);
+ 
+      return speed;   
+    };
 
     self.MoveRandom = function (ballDiv, ballSize){
       var transition = function(e) {
@@ -44,22 +58,25 @@
           // Create random position for the ball
           var randomPos = self.RandomPosition(ballSize);
 
-          // Set speed transition 4 second for now (Might change it so user can set it)
-          ballDiv.style.transitionDuration = "4s";
+          // Set Calculate speed of the transition
+          var offset = ballDiv.getBoundingClientRect();
+          var currentPos = { x: offset.left, y: offset.top }
+          var speed = self.CalculateSpeed(currentPos, randomPos);
+          ballDiv.style.transitionDuration = speed.toString() + "s";
 
           // Set top and left transition
           ballDiv.style.left = randomPos.x.toString()+"px";
           ballDiv.style.top = randomPos.y.toString()+"px";
 
         }
-      }
+      };
 
       // Event Listener for across browser when transition end callback function "transition"
       ballDiv.addEventListener("webkitTransitionEnd", transition, false);
       ballDiv.addEventListener("transitionend", transition, false);
       ballDiv.addEventListener("oTransitionEnd", transition, false);
 
-    }
+    };
 
     // Function that Creates a Ball
     self.CreateBall  = function(ballSize) {
@@ -90,7 +107,7 @@
         // Create Balll
         self.CreateBall(self.ballSize);
       });
-    }
+    };
 
   };
 
