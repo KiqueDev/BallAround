@@ -1,12 +1,16 @@
+// A simple animation using CSS3 Transitions
+// By: Enrique W.
 (function (root) {
   "use strict";
 
+  // Ball Around Intance Object that creates the transition 
   var BallAround = function () {
     // Set this to self var ncase of scope problems
     var self = this;
 
     // Defaults ballSize is 60px
     self.ballSize = 60;
+    
     // Get #content element selector
     self.contentDiv = document.querySelector("#content");
 
@@ -21,57 +25,42 @@
       ballDiv.style.height = ballSize.toString()+"px";
     };
 
-    // Function that Creates Random Position of the ball
+    // Function that Creates Random Position of the ball. Returns An Pos Object
     self.RandomPosition = function(ballSize){
       var height = window.innerHeight - (ballSize+60); // Additional 60 due to the header
       var width = window.innerWidth - ballSize;
 
+      // Make random x,y position for the ball
       var newHeight = Math.ceil(Math.random() * height);
       var newWidth = Math.ceil(Math.random() * width);
 
+      // Position Object with random x,y
       var pos = { x: newWidth , y: newHeight }
 
       return pos;   
     };
 
-    // Function that Calculates the speed of the ball
-    self.CalculateSpeed = function(oldPos, newPos){
-      var x = Math.abs(oldPos.x - newPos.x);
-      var y = Math.abs(newPos.y - newPos.y);
-      
-      var greatest = x > y ? x : y;
-      
-      var speedModifier = 100;
- 
-      var speed = Math.ceil(greatest/speedModifier);
- 
-      return speed;   
-    };
-
+    // Function that moves the ball around randomly 
     self.MoveRandom = function (ballDiv, ballSize){
+      // Function that does the ball transition Left & Top
       var transition = function(e) {
         // Stop other listener such as parent
         e.stopPropagation();
-        // Make sure transition runs once since it runs for all set of transition made "top, left, width, height"
-        if(e.propertyName === "width" || e.propertyName === "top") {
 
-          // Create random position for the ball
-          var randomPos = self.RandomPosition(ballSize);
+        // Create random position for the ball
+        var randomPos = self.RandomPosition(ballSize);
 
-          // Set Calculate speed of the transition
-          var offset = ballDiv.getBoundingClientRect();
-          var currentPos = { x: offset.left, y: offset.top }
-          var speed = self.CalculateSpeed(currentPos, randomPos);
-          ballDiv.style.transitionDuration = speed.toString() + "s";
+        // Set speed Default to 4 second (Might change it so user can set the speed)
+        ballDiv.style.transitionDuration = "4s";
 
-          // Set top and left transition
-          ballDiv.style.left = randomPos.x.toString()+"px";
-          ballDiv.style.top = randomPos.y.toString()+"px";
-
-        }
+        // Set top and left transition
+        ballDiv.style.left = randomPos.x.toString()+"px";
+        ballDiv.style.top = randomPos.y.toString()+"px";
+        
       };
 
       // Event Listener for across browser when transition end callback function "transition"
+      // transition listerner might run more than once due to the number of animation/transition ex: top,left,width,height...
       ballDiv.addEventListener("webkitTransitionEnd", transition, false);
       ballDiv.addEventListener("transitionend", transition, false);
       ballDiv.addEventListener("oTransitionEnd", transition, false);
@@ -107,6 +96,7 @@
         // Create Balll
         self.CreateBall(self.ballSize);
       });
+
     };
 
   };
@@ -121,8 +111,8 @@
 
 }(this));
 
-// Creation
+////////////////////////// TESTING //////////////////////////
 var b = new BallAround();
-//b.init(40); // Custom Ball Size
+//b.init(90); // Custom Ball Size
 b.init();
 
